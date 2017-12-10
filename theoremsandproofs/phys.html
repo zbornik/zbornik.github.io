@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Теореми и доказателства по физика</title>
+<meta name="description" content="Енергията е способност да се извършва работа">
+<meta name="description" content="Energy is the capacity to do work">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]},
+    TeX: {
+      Macros: {
+		BVEC: ["{\\boldsymbol{#1}}",1], // Bold Vector (without arrow, hat or dot)
+        VEC: ["{\\boldsymbol{\\vec{#1}}}",1], // Bold Vector With Arrow // overrightarrow == vec
+        UVEC: ["{\\boldsymbol{\\hat{#1}}}",1], // Bold Unit Vector With Hat
+		DVEC: ["{\\boldsymbol{\\dot{#1}}}",1], // Bold Vector With Dot
+		DDVEC: ["{\\boldsymbol{\\ddot{#1}}}",1], // Bold Vector With 2 Dots
+		OIINT: ["{\\,\\bigcirc\\!\\!\\!\\!\\!\\!\\!\\!\\!\\!\\;\\iint_{#1}\\,}",1], // Closed Double Integral
+		EPSILON: ["{\\varepsilon}"] // Permittivity
+      }
+    }
+  });
+</script>
+<script type="text/javascript" async 
+  src="http://cdn.mathjax.org/mathjax/2.4-latest/MathJax.js?config=TeX">
+</script>
+
+<!-- Three.js -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+<script src="http://threejs.org/examples/js/controls/TrackballControls.js"></script>
+<script src="helvetiker_regular.typeface.js"></script>
+<script src="drawing.js"></script>
+<script src="phys.js"></script>
+
+<!-- Style -->
+<style>
+  canvas {margin: 2px; border: 1px black solid;}
+  img {width:20px;height:20px;}
+  .hidden {display: none;}
+  .visible {display: block;}
+  h1 {
+	text-align:center;
+	margin-top: 3em;
+  }
+  h2 {
+    font-weight: bold;
+    background-color: #DDDDDD;
+    padding: .2em .5em;
+    margin-top: 1.5em;
+    border-top: 3px solid #666666;
+    border-bottom: 2px solid #999999;
+  }
+  .indent {
+    padding: .2em 3.5em;
+  }
+</style>
+
+</head>
+<body>
+
+<blockquote>
+
+
+
+
+<!--  
+	Механика
+-->
+<h1>Механика</h1>
+
+
+<!-- Кинематика на линейно движение -->
+<h2>Кинематика на линейно движение</h2>
+<div>
+Разстояние \( r \) от центъра на координатната система до т. \( M(x,y,z) \)
+\[ r = \sqrt{x^{2} + y^{2} + z^{2}} \]
+
+Времеви интервал \( \Delta t \) \( [s] \)
+\[ \Delta t = t_{2} - t_{1} \]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('displacement', Phys.displacement);" />
+Път \( s \) \( [m] \)
+<div id="displacement"></div>
+\[ \Delta s = \widehat{M_{1}M_{2}} \]
+\[ d s = v \, d t \]
+
+Разлика между два вектора
+\[ \Delta \VEC{r} = \VEC{r}_{2} - \VEC{r}_{1} \]
+
+Връзка между \( \Delta s \) и \( |\Delta \VEC{r}| \) когато клонят към \( 0 \)
+\[ d s = \lim_{\Delta s \to 0} \Delta s = \lim_{|\Delta \VEC{r}| \to 0} |\Delta \VEC{r}| = |d \VEC{r}| \]
+
+Скорост \( \VEC{v} \) \( [\frac{m}{s}] \) \( \Rightarrow \) първа производна на пътя \( \Rightarrow \) вектор допирателен на пътя
+\[ v = \lim_{\Delta t \to 0} \frac{\Delta s}{\Delta t} = \frac{d s}{d t} \]
+\[ \VEC{v} =\frac{d \VEC{r}}{d t} = \DVEC{r} = \frac{d \VEC{r}}{d s} \frac{d s}{d t} = \UVEC{\tau} v \]
+
+Еденичен допирателен вектор по траекторията \( \UVEC{\tau} \)
+\[ \UVEC{\tau} = \frac{d \VEC{r}}{d s} \]
+
+Еденичен нормален вектор \( \UVEC{n} \) насочен към центъра на окръжноста
+\[ \UVEC{\tau} \perp \UVEC{n} \]
+
+Ускорение \( \VEC{a} \) \( [\frac{m}{s^2}] \) \( \Rightarrow \) първа производна на скоростта \( \Rightarrow \) втора производна на пътя \( \Rightarrow \) вектор допирателен на скоростта
+\[ \VEC{a} = \lim_{\Delta t \to 0} \frac{\Delta \VEC{v}}{\Delta t} = \frac{d \VEC{v}}{d t} = \DVEC{v} = \frac{d}{d t}(\frac{d \VEC{r}}{d t}) = \frac{d^{2} \VEC{r}}{d t^{2}} = \DDVEC{r} \]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('acceleration', Phys.acceleration);" />
+Тангенциалнo \( \VEC{a}_{\tau} \) и нормално \( \VEC{a}_{n} \) ускорение
+<div id="acceleration"></div>
+\[ \VEC{a} = \frac{d \VEC{v}}{d t} = \frac{d v}{d t} \UVEC{\tau} = \frac{d}{d t}(v \UVEC{\tau}) = \frac{d v}{d t} \UVEC{\tau} + v \frac{d \UVEC{\tau}}{d t} = \frac{d v}{d t} \UVEC{\tau} + v \frac{d \tau}{d t} \UVEC{n} \]
+
+<p class="indent">(1) От синусовия закон \( \frac{a}{\sin{\alpha}} = \frac{b}{\sin{\beta}} = \frac{c}{\sin{\gamma}} \) \( \Rightarrow \)</p>
+\[ 
+\frac{|\UVEC{\tau}|}{\sin{90}} = \frac{\frac{d \tau}{2}}{\sin{\frac{d \varphi}{2}}} 
+\Rightarrow
+d \tau = 2 \sin{\frac{d \varphi}{2}} \frac{|\UVEC{\tau}|}{\sin{90}} = 2 \sin{\frac{d \varphi}{2}}
+\]
+
+<p class="indent">(2) От \( \lim_{\varphi \to 0} \frac{\sin{\varphi}}{\varphi} = 1 \) \( \Rightarrow \)</p>
+\[ 
+\lim_{\varphi \to 0} \sin{\frac{d \varphi}{2}} = \frac{d \varphi}{2}
+\]
+
+<p class="indent">(3) От (1) и (2) \( \Rightarrow \)</p>
+\[ d \tau = 2 \frac{d \varphi}{2} = d \varphi = \frac{d s}{R} = \frac{v}{R} d t \]
+
+<p class="indent">От (3) \( \Rightarrow \)</p>
+\[ \VEC{a} = \frac{d v}{d t} \UVEC{\tau} + v \frac{\frac{v}{R} d t}{d t} \UVEC{n} = \frac{d v}{d t} \UVEC{\tau} + \frac{v^2}{R} \UVEC{n} \]
+
+Тангенциалнo ускорение \( a_{\tau} \)
+\[ a_{\tau} = \frac{d v}{d t} \]
+
+Нормалнo ускорение \( a_{n} \)
+\[ a_{n} = \frac{v^2}{R} \]
+</div>
+
+
+<!-- Кинематика на въртеливо движение -->
+<h2>Кинематика на въртеливо движение</h2>
+<div>
+Еденичен допирателен вектор по траекторията \( \UVEC{\tau} \) и еденичен нормален вектор \( \UVEC{n} \) перпендикулярен на равнината на въртене
+\[ \UVEC{\tau} \perp \UVEC{n} \]
+
+Ъгъл на преместване \( \VEC{\varphi} \) \( [rad] \) \( \Longleftarrow \) \( S = 2 \pi R \)
+\[ \VEC{s} = \VEC{\varphi} \times \VEC{R} \]
+\[ \VEC{\varphi} = \frac{s}{R} \UVEC{n} = \frac{v}{R} d t \, \UVEC{n} \]
+
+Ъглова скорост \( \VEC{\omega} \) \( [\frac{rad}{s}] \)
+\[ \VEC{v} = \frac{d}{d t}(\VEC{s}) = \frac{d}{d t}(\VEC{\varphi} \times \VEC{R}) = \VEC{\omega} \times \VEC{R} \]
+\[ \VEC{\omega} = \lim_{\Delta t \to 0} \frac{\Delta \VEC{\varphi}}{\Delta t} = \frac{d \VEC{\varphi}}{d t} = \DVEC{\varphi} = \frac{d \varphi}{d t} \UVEC{n} = \frac{\frac{v}{R} d t}{d t} \UVEC{n} = \frac{v}{R} \UVEC{n} \]
+
+Kръгова честота \( \omega \) \( [\frac{rad}{s}] \)
+\[ \omega = 2 \pi f \]
+
+Ъглово ускорение \( \VEC{\alpha} \) \( [\frac{rad}{s^2}] \)
+\[ \VEC{a} = \frac{d}{d t}(\VEC{v}) = \frac{d}{d t}(\VEC{\omega} \times \VEC{R}) = \VEC{\alpha} \times \VEC{R} \]
+\[ \VEC{\alpha} = \lim_{\Delta t \to 0} \frac{\Delta \VEC{\omega}}{\Delta t} = \frac{d \VEC{\omega}}{d t} = \DVEC{\omega} = \DDVEC{\varphi} = \frac{d \omega}{d t} \UVEC{n} = \frac{\frac{v}{R}}{d t} \UVEC{n} = \frac{a}{R} \UVEC{n} \]
+
+Тангенциалнo ускорение \( a_{\tau} \)
+\[ a_{\tau} = \frac{d v}{d t} = \alpha R \]
+
+Нормалнo ускорение \( a_{n} \)
+\[ a_{n} = \frac{v^2}{R} = \omega^2 R \]
+</div>
+
+
+<!-- Динамика на линейно движение -->
+<h2>Динамика на линейно движение</h2>
+<div>
+Първият принцип на Нютон гласи, че всяка тяло запазва състоянието си на покой 
+или праволинейно равномерно движение, докато не му въздейства друго тяло
+<br /><br />
+
+Вторият принцип на Нютон гласи, че ускорението, което получава дадено тяло, е пропорционално на силата, 
+която му действа и обратно пропорционално на масата на тялото. В система SI основните мерни единици са подбрани така, че коефициентът k=1.
+\[ \VEC{a} = k \frac{\VEC{F}}{m} = \frac{\VEC{F}}{m} \]
+
+Сила \( \VEC{F} \) \( [N] \) \( [\frac{kg \, m}{s^{2}}] \)
+\[ \VEC{F} = m \VEC{a} = m \frac{d \VEC{v}}{d t} = \frac{d }{d t} (m \VEC{v}) = \frac{d \VEC{p}}{d t} = \DVEC{p} \]
+
+Импулс \( \VEC{p} \) \( [Ns] \) \( [\frac{kg \, m}{s}] \)
+\[ \VEC{p} = m \VEC{v} \]
+
+Трети принцип на Нютон гласи, че на всяко действие отговаря равно по големина и противоположно по посока противодействие
+\[ \VEC{F_{12}} = - \VEC{F_{21}} \]
+
+Събиране на сили – принцип на суперпозицията. Ако на едно тяло му действат няколко сили, 
+то получава ускорение по посока на векторната сума от всички действащи сили, която се нарича равнодействаща.
+\[ \VEC{F} = \sum_{i = 1}^{n} \VEC{F}_i \]
+
+Импулс на системата
+\[ \VEC{p} = \sum_{i = 1}^{n} \VEC{p}_i \]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('impulse', Phys.impulse);" />
+Закон за изменение на импулса. \( \VEC{f_{ki}} \) - вътрешната силата с която \( k \) действа върку \( i \). \( \VEC{F_i} \) - външната сила върку \( i \). 
+<div id="impulse"></div>
+\[ \DVEC{p} = \sum_{i = 1}^{n} \DVEC{p}_i = \sum_{k,i = 1}^{n} \VEC{f_{ki}} + \sum_{i = 1}^{n} \VEC{F_i} = \sum_{i = 1}^{n} \VEC{F_i} \]
+
+Законът за запазване на импулса - ако върху тяло не действат външни сили то импулса е постоянен
+\[ \DVEC{p} = 0 \,\,\, \Rightarrow \,\,\, \VEC{p} = const\]
+
+Център на масите \( \VEC{r_c} \) на всяка изолирана система остава в покой или се движи равномерно праволинейно
+\[ \VEC{r_c} = \frac{\sum_{i = 1}^{n} m_i \VEC{r_i}}{m} \]
+\[ \VEC{v_c} = \frac{d \VEC{r_c}}{d t} = \frac{\sum_{i = 1}^{n} m_i \DVEC{r_i}}{m} = \frac{\sum_{i = 1}^{n} m_i \VEC{v_i}}{m} = \frac{\VEC{p}}{m} \]
+
+Работа \( A \) \( [J] \) \( [Nm] \)
+\[ d A = \VEC{F} \, d \VEC{r} \,\,\, \Rightarrow \,\,\, A = \int \VEC{F} \, d \VEC{r} \]
+
+Мощност \( P \) \( [W] \) \( [\frac{J}{s}] \)
+\[ P = \frac{d A}{d t} = \frac{\VEC{F} \, d \VEC{r}}{d t} = \VEC{F} \, \VEC{v} \]
+
+Кинетична енергия \( E_k \) \( [J] \)
+\[  
+E_k = \int d A = \int \VEC{F} \, d \VEC{r} = \int m  \, \VEC{a}  \, d \VEC{r} = \int m \, \frac{d \VEC{v}}{d t} \, d \VEC{r}
+= \int m \, d \VEC{v} \, \frac{d \VEC{r}}{d t} = \int m \, d \VEC{v} \, \VEC{v} = m \frac{\VEC{v}^2}{2} = \frac{mv^2}{2}
+\]
+
+Потенциална енергия \( E_p \) \( [J] \)
+\[ E_p = \int d A = \int \VEC{F} \, d \VEC{r} = \int m  \, \VEC{a}  \, d \VEC{r} = \int m \, g \, d \VEC{r} = mgh \]
+
+Общата механична енергия (пълна енергия) \( E \) на тялото
+\[ E = E_k + E_p \]
+
+Изменение на механичната енергия - увеличаването на енергията е за сметка на работата
+\[ d E = d E_k + d E_p = - d A \]
+</div>
+
+
+<!-- Динамика на въртеливо движение -->
+<h2>Динамика на въртеливо движение</h2>
+<div>
+Инерционен(инерчен) момент \( I \) \( [kg \, m^2] \)
+\[ I = m R^2 \]
+\[ I = \sum_{i = 1}^{n} m_i r_i^2 = \int_V \rho(\VEC{r}) \, \VEC{r}^2 \, dV \]
+
+Момент на силата \( \VEC{M} \) \( [Nm] \) (въртящ момент \( \VEC{\tau} \)) 
+\[ 
+\VEC{M} = \VEC{R} \times \VEC{F} = \VEC{R} \times (m \VEC{a}) = m (\VEC{R} \times \VEC{a}) = m (\VEC{R} \times (\VEC{\alpha} \times \VEC{R}))
+= m(\VEC{\alpha}(\VEC{R} \, \VEC{R}) - \VEC{R}(\VEC{R} \, \VEC{\alpha})) = m (\VEC{\alpha} \, R^2 - 0) = m \, R^2 \, \VEC{\alpha} = I \, \VEC{\alpha} = \DVEC{L}
+\]
+
+Момент на импулса \( \VEC{L} \) \( [\frac{kg \, m^2}{s}] \) (кинетичен момент, ъглов момент, орбитален момент)
+\[ 
+\VEC{L} = \VEC{R} \times \VEC{p} = \VEC{R} \times (m \VEC{v}) = m (\VEC{R} \times \VEC{v}) = m (\VEC{R} \times (\VEC{\omega} \times \VEC{R})) 
+= m(\VEC{\omega}(\VEC{R} \, \VEC{R}) - \VEC{R}(\VEC{R} \, \VEC{\omega})) = m (\VEC{\omega} \, R^2 - 0) = m \, R^2 \, \VEC{\omega} = I \, \VEC{\omega} 
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('momentOfImpulse', Phys.momentOfImpulse);" />
+Закон за изменение на момента на импулса. Момента на силата \( \VEC{M_i} \) е резултат от въздействието на външната сила \( \VEC{F_i} \) на разстояние \( \VEC{R_i} \) от центъра на оста
+<div id="momentOfImpulse"></div>
+\[ \DVEC{L} = \sum_{i = 1}^{n} \DVEC{L_i} = \sum_{i = 1}^{n} \VEC{M_i} \]
+
+Закон за запазване на момента на импулса - ако върху тяло не действат външни сили то импулса е постоянен
+\[ \DVEC{L} = 0 \,\,\, \Rightarrow \,\,\, \VEC{L} = const\]
+
+Работа \( A \) \( [J] \) \( [Nm] \)
+\[ d A = \VEC{F} \, d \VEC{r} = \VEC{F} (d \VEC{\varphi} \times \VEC{R}) = (\VEC{R} \times \VEC{F}) d \VEC{\varphi} = \VEC{M} \, d \VEC{\varphi} \]
+
+Мощност \( P \) \( [W] \) \( [\frac{J}{s}] \)
+\[ P = \frac{d A}{d t} = \frac{\VEC{M} \, d \VEC{\varphi}}{d t} = \VEC{M} \, \VEC{\omega} \]
+
+Кинетична енергия \( E_k \) \( [J] \)
+\[ E_k =  \frac{mv^2}{2} = \frac{m (\VEC{\omega} \times \VEC{R})^2}{2} = \frac{m \, \omega^2 \, R^2}{2} = \frac{1}{2} I \, \omega^2 \]
+</div>
+
+
+
+
+
+<!--  
+	Електричество
+-->
+<h1>Електромагнетизъм</h1>
+
+
+<!-- Електростатично поле -->
+<h2>Електростатично поле</h2>
+<div>
+Заряд на електрона \( e \) \( [C] \)
+\[ e = - 1.6 \times 10^{19} \]
+
+Линейна плътност на заряда \( \lambda \) \( [\frac{C}{m}] \)
+\[ \lambda = \lim_{\Delta l \to 0} \frac{\Delta q}{\Delta l} = \frac{d q}{d l} \,\,\, \Rightarrow \,\,\, q = \int_l \lambda d l \]
+
+Повърхностна плътност на заряда \( \sigma \) \( [\frac{C}{m^2}] \)
+\[ \sigma = \lim_{\Delta S \to 0} \frac{\Delta q}{\Delta S} = \frac{d q}{d S} \,\,\, \Rightarrow \,\,\, q = \iint_S \sigma d S \]
+
+Обемна плътност на заряда \( \rho \) \( [\frac{C}{m^3}] \)
+\[ \rho = \lim_{\Delta V \to 0} \frac{\Delta q}{\Delta V} = \frac{d q}{d V} \,\,\, \Rightarrow \,\,\, q = \iiint_V \rho d V \]
+
+Диелектрична проницаемост във вакуум \( \EPSILON_0 \) \( [\frac{F}{m}] \) (Електричната константа)
+\[ \EPSILON_0 = \frac{1}{4 \pi 9.10^{-12}} \]
+
+Относителна диелектрична проницаемост \( \EPSILON_r \), за вакуум \( \EPSILON_r = 1 \), а за всяко вещество \( \EPSILON_r > 1 \)
+\[
+\EPSILON_r = 1 + \chi_e
+\]
+
+Абсолютна диелектрична проницаемост \( \EPSILON \) \( [\frac{F}{m}] \) е мярка за съпротивлението което изпитва и оказва електростатично поле \( \VEC{E} \) при формирането си в дадена среда.
+Проницаемостта на средата изразява колко поток \( \Phi_E \) се създава от еденица заряд. Повече поток \( \Phi_E \) се създава в среда с по-малка абсолютна проницаемост заради поляризиращия ефект на средата.
+\[
+\EPSILON = \EPSILON_0 \EPSILON_r
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('CoulombLaw', Phys.CoulombLaw);" />
+Сила \( \VEC{F} \) \( [N] \) на взаимодействие между два точкови заряда (Закон на Кулон)
+<div id="CoulombLaw"></div>
+\[ 
+\VEC{F} = k \frac{q_1 q_2}{r^2} \UVEC{r} = \frac{1}{4 \pi \EPSILON} \frac{q_1 q_2}{r^2} \UVEC{r} = q \VEC{E}
+\]
+
+Електрически интензитет (Електрическа напрегнатост) \( \VEC{E} \) \( [\frac{V}{m}] \). Зависи от електрическите свойства на средата (\( \EPSILON \))
+\[ 
+\VEC{E} = k \frac{Q}{r^2} \UVEC{r} = \frac{1}{4 \pi \EPSILON} \frac{Q}{r^2} \UVEC{r} = \frac{\VEC{F}}{q}
+\]
+
+Коефициент на пропорционалност \( k \) \( [\frac{N m^2}{C^2}] \)
+\[ k = \frac{1}{4 \pi \EPSILON} \]
+
+Единичен вектор \( \UVEC{r} \) сочещ от единия към другия заряд
+\[ \UVEC{r} = \frac{\VEC{r}}{r} \]
+
+Електрическа индукция (Електрическо разместване) \( \VEC{D} \) \( [\frac{C}{m^2}] \). Не зависи от електрическите свойства на средата (\( \EPSILON \))
+\[ 
+\VEC{D} = \EPSILON \VEC{E} \,\,\,\,\,\,\,\,\, \VEC{E} = \frac{\VEC{D}}{\EPSILON}
+\]
+
+Принцип на суперпозицията (наслагване)
+\[ \VEC{D} = \sum_{i = 1}^{n} \VEC{D}_i \,\,\,\,\,\,\,\,\, \VEC{E} = \sum_{i = 1}^{n} \VEC{E}_i \,\,\,\,\,\,\,\,\, \VEC{F} = \sum_{i = 1}^{n} \VEC{F}_i \]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('GaussLaw', Phys.GaussLaw);" />
+Поток \( \Phi_E \) \( [Vm] \) на електрическия интензитет \( \VEC{E} \) преминаващ през повърхността \( S \) и обхващащ зарядите \( q_i \) (Закон на Гаус)
+<div id="GaussLaw"></div>
+\[ Q = \sum_{i = 1}^{n} q_i \]
+\[ 
+\Phi_E = \oint_S d \Phi_E = \OIINT{S} \VEC{E} \, d \VEC{S}
+\]
+\[
+\OIINT{S} \VEC{E} \, d \VEC{S}
+= \OIINT{S} k \frac{Q}{r^2} \UVEC{r} \, d S \, \UVEC{n} 
+= \OIINT{S} k \, Q \frac{d S \cos{\theta}}{r^2}
+= \int_{0}^{4 \pi} \frac{1}{4 \pi \EPSILON} Q \, d \omega 
+= \frac{Q}{\EPSILON} 
+= \frac{1}{\EPSILON} \iiint_V \rho \, d V
+\]
+\[ 
+\OIINT{S} \VEC{E} \, d \VEC{S} = \iiint_V \BVEC{\nabla} \, \VEC{E} \, d V 
+\]
+\[ \BVEC{\nabla} \, \VEC{E} = \frac{\rho}{\EPSILON} \]
+
+Поток \( \Phi_D \) \( [C] \) на електрическата индукция \( \VEC{D} \) преминаващ през повърхността \( S \) и обхващащ зарядите \( q_i \) (Закон на Гаус)
+\[ \Phi_D = \oint_S d \Phi_D = \OIINT{S} \VEC{D} \, d \VEC{S} = Q \]
+\[ \BVEC{\nabla} \, \VEC{D} = \rho \]
+
+Циркулация на електростатично поле \( \VEC{E} \)
+\[ \oint_l \VEC{E} \, d \VEC{l} = 0 \]
+\[ \oint_l \VEC{E} \, d \VEC{l} = \iint_S \BVEC{\nabla} \times \VEC{E} \, d \VEC{S} \]
+\[ \BVEC{\nabla} \times \VEC{E} = 0 \]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('electricWork', Phys.electricWork);" />
+Работа \( A \) \( [J] \) \( [Nm] \) на електростатично поле \( \VEC{E} \) 
+<div id="electricWork"></div>
+\[
+d A = \VEC{F} \, d \VEC{l} = q_0 \VEC{E} \, d \VEC{l}
+\]
+\[
+A = \int_1^2 q_0 E \, d l \cos{\alpha} 
+= q_0 \int_{r_1}^{r_2} \frac{q}{4 \pi \EPSILON r^2} d r
+= \frac{q q_0}{4 \pi \EPSILON} \int_{r_1}^{r_2} \frac{d r}{r^2}
+= \frac{q q_0}{4 \pi \EPSILON} (\frac{1}{r_2} - \frac{1}{r_1})
+= \frac{q q_0}{4 \pi \EPSILON r_2} - \frac{q q_0}{4 \pi \EPSILON r_1}
+\]
+\[
+= W_{p_2} - W_{p_1}
+= q_0 (\frac{q}{4 \pi \EPSILON r_2} - \frac{q}{4 \pi \EPSILON r_1})
+= q_0 (\varphi_2 - \varphi_1)
+= - q_0 U
+\]
+
+Потенциална енергия \( W_p \) \( [J] \) на заряда \( q_0 \) в една точка от електростатичното поле \( \VEC{E} \) на заряда \( q \) на разстояние \( r \) от него
+\[
+W_p = \frac{q q_0}{4 \pi \EPSILON r}
+\]
+
+Потенциал \( \varphi \) \( [V] \) на електростатично поле \( \VEC{E} \) на един точков заряд \( q \) в точка на разстояние \( r \) от него
+\[
+\varphi = \frac{q}{4 \pi \EPSILON r}
+\]
+
+Извършената работа е за сметка на потенциалната енергия. Работата \( d A \) на електростатичните сили намаляват потенциалната енергия с \( - d W_p \) на заряда \( q_0 \)
+\[
+d A = - d W_p
+\]
+
+Геометричното място на точки с еднакъв потенциал се нарича еквипотенциална повърхност. Представляват цилиндрични окръжности около центъра на заряда. 
+Работата \( d A \) на електростатичните сили по протежение на еквипотенциална повърхност е \( 0 \) тъй като потенциалната енергия не се променя.
+\[\]
+
+Напрежение \( U \) \( [V] \) \( [\frac{J}{C}] \)
+\[
+U = \varphi_2 - \varphi_1 = \varphi = - \frac{A}{q_0}
+\]
+\[
+-dU = \VEC{E} \, d \VEC{l} \equiv \VEC{E} \, d \VEC{r}
+\]
+\[
+\VEC{E} = - \frac{dU}{d \VEC{r}} = - \BVEC{\nabla} U = - \BVEC{\nabla} \varphi
+\]
+
+Капацитет \( C \) \( [F] \) \( [\frac{C}{V}] \)
+\[
+C = \frac{q}{U}
+\]
+
+Капацитет \( C \) на плосък кондензатор с площ на плочите \( S \) и разстояние между тях \( d \)
+\[
+q = \OIINT{S} \VEC{D} \, d \VEC{S} = \OIINT{S} \EPSILON \, \VEC{E} \, d \VEC{S} = \EPSILON E \, S \,\,\, \Rightarrow \,\,\, E = \frac{q}{\EPSILON S}
+\]
+\[
+U = \int_0^d \VEC{E} \, d \VEC{l} = \int_0^d E \, d l \cos{0} = \int_0^d E \, d l = \frac{q}{\EPSILON S} \int_0^d d l = \frac{q \, d}{\EPSILON S}
+\]
+\[
+C = \frac{q}{U} = \frac{\EPSILON S}{d}
+\]
+
+Електрическа енеригия \( W_E \) съхранена в кондензатор с капацитет \( C \) зареден до напрежение \( U \). 
+Работата \( A \) извършена от батерията за зареждане на кондензатор е \( U q \) докато електрическата енеригия \( W_E \) 
+съхранена в кондензатора е на половина \( \frac{1}{2} U q \). Останалата част от работата \( A \) на батерията 
+се проеобразува в топлинна енергия разсяна от проводниците и резисторите.
+\[
+d A = - U \, d q \,\,\, \Rightarrow \,\,\, d W_E = U \, d q = \frac{q}{C} d q
+\]
+\[
+W_E = \frac{1}{C} \int q \, d q = \frac{1}{C} \frac{q^2}{2} 
+= \frac{1}{2} \frac{q^2}{C} 
+= \frac{1}{2} U \, q 
+= \frac{1}{2} C \, U^2
+\]
+
+Моментен ток \( i \) и мощност \( p \) през кондензатор с капацитет \( C \) зареден до напрежение \( u \)
+\[
+i = C \frac{d u}{d t} \,\,\,\,\,\,\,\,\, p = i u
+\]
+</div>
+
+
+<!-- Електрическо поле -->
+<h2>Електрическо поле</h2>
+<div>
+Електричен ток \( i \) \( [A] \) \( [\frac{C}{s}] \) е електричния заряд \( d q \), 
+който преминава през напречното сечение \( d \VEC{S} \) за време \( d t \).
+\[
+i = \frac{d q}{d t}
+\]
+
+Плътност на тока \( \VEC{J} \) \( [\frac{A}{m^2}] \) е електричния ток \( i \),
+който преминава през напречното сечение \( d \VEC{S} \) за време \( d t \).
+\[
+\VEC{J} = \frac{d i}{d \VEC{S}} \,\,\, \Rightarrow \,\,\, i = \iint_S \VEC{J} \, d \VEC{S}
+\]
+
+Специфична електрична проводимост \( \gamma \) \( [\frac{1}{\Omega m}] \)
+\[
+\gamma = \frac{1}{\rho}
+\]
+
+Специфично електрично съпротивление \( \rho \) \( [\Omega m] \)
+\[
+\rho = \rho_0 (1 + \alpha t)
+\]
+
+<p class="indent">
+\( t \) е температура в\(\,^{\circ}\)C
+</p>
+<p class="indent">
+\( \rho_0 \) е специфично електрично съпротивление при 0\(\,^{\circ}\)C
+</p>
+<p class="indent">
+\( \alpha \) е температурен коефициент на съпротивлението
+</p>
+
+Съпротивление \( R \) \( [\Omega] \) \( [\frac{V}{A}] \)
+\[
+R = \int_l \rho \frac{d l}{S} = \rho \frac{l}{S}
+\]
+    
+Закон на Ом
+\[
+I = \frac{U}{R}
+\]
+\[
+d i \, R = d u \,\,\, \Rightarrow \,\,\, d i \, 
+\rho \frac{d \VEC{l}}{d \VEC{S}} = \VEC{E} \, d \VEC{l} \,\,\, \Rightarrow \,\,\, 
+\frac{d i}{d \VEC{S}} \rho = \VEC{E} \,\,\, \Rightarrow \,\,\,
+\VEC{J} \rho = \VEC{E} \,\,\, \Rightarrow \,\,\,
+\VEC{J} = \gamma \VEC{E}
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('convectionCurrent', Phys.convectionCurrent);" />
+Плътност на тока на конвекцията. Тока на конвекцията е постоянен ток, който възниква при движение на заредени частици 
+със заряд \( q \) с постоянна скорост \( \VEC{v} \) във вакуум. За време \( d t \) през обема \( d V \) преминават \( d N \) 
+на брой частици (\( n \) е броя частици в единица обем), които имат сумарен заряд \( d Q \) 
+(\( q \) е заряда на всяка частица; \( \rho = n \, q \) е обемната плътност на заредените частици).
+<div id="convectionCurrent"></div>
+\[ 
+d V = d \VEC{l} d \VEC{S} = \VEC{v} d t \, d \VEC{S}
+\]
+\[ 
+d N = n \, d V
+\]
+\[ 
+d Q = q \, d N
+\]
+\[ 
+d i = \frac{d Q}{d t} = \frac{q \, n \, \VEC{v} d t \, d \VEC{S}}{d t} = q \, n \, \VEC{v} \, d \VEC{S} = \rho \, \VEC{v} \, d \VEC{S}
+\]
+\[
+\VEC{J} = \frac{d i}{d \VEC{S}} = \frac{\rho \, \VEC{v} \, d \VEC{S}}{d \VEC{S}} = \rho \, \VEC{v}
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('continuityEquation', Phys.continuityEquation);" />
+Уравнение (принцип) на непрекъснатостта на тока на проводимостта. Токът през произволна затворена повърхност \( S \) 
+е равен на взетата с обратен знак скорост на изменение на електричния заряд в обема \( V \). 
+Намаляването на заредените частици в даден обем води до възникване на ток на проводимостта.
+<div id="continuityEquation"></div>
+\[ 
+i = \OIINT{S} \VEC{J} \, d \VEC{S} = - \frac{d q}{d t}
+\]
+\[ 
+\OIINT{S} \VEC{J} \, d \VEC{S} = - \frac{d}{d t} \iiint_V \rho \, d V = - \iiint_V \frac{\partial \rho}{\partial t} \, d V
+\]
+\[ 
+\OIINT{S} \VEC{J} \, d \VEC{S} = \iiint_V \BVEC{\nabla} \, \VEC{J} \, d V
+\]
+\[ 
+\BVEC{\nabla} \, \VEC{J} = - \frac{\partial \rho}{\partial t} 
+\]
+
+Дивергенция и циркулация на електрическо поле в постояннотоков режим (\( \rho = const \) и \( \frac{\partial \rho}{\partial t} = 0 \)). 
+Линиите на постоянния ток на проводимостта са непрекъснати и затворени, а електрическото поле е консервативно (потенциално).
+\[
+\BVEC{\nabla} \, \VEC{J} = 0 \,\,\,\,\,\,\,\,\, \BVEC{\nabla} \times \VEC{J} = 0 \,\,\,\,\,\,\,\,\, \BVEC{\nabla} \times \VEC{E} = 0
+\]
+
+Дивергенция и циркулация на електрическо поле в променливотоков режим (\( \rho \neq const \) и \( \frac{\partial \rho}{\partial t} \neq 0 \)). 
+Линиите на променливия тока на проводимостта са прекъснати, но затворени (има поток!), а електрическото поле не е консервативно.
+\[
+\BVEC{\nabla} \, \VEC{J} \neq 0 \,\,\,\,\,\,\,\,\, \BVEC{\nabla} \times \VEC{J} \neq 0 \,\,\,\,\,\,\,\,\, \BVEC{\nabla} \times \VEC{E} \neq 0
+\]
+
+Работа \( A \) \( [J] \) \( [Nm] \) на електрическо поле \( \VEC{E} \)
+\[
+d A = - q U = - I U d t
+\]
+
+Мощност \( P \) \( [W] \) на електрическо поле \( \VEC{E} \)
+\[
+P = \frac{d A}{d t} = I U = I^2 R = \frac{U^2}{R}
+\]
+
+Освобождаване на топлина при протичане на ток през проводник (Закон на Джаул-Ленц). 
+\( \frac{d P}{d V} \) изразява плътността на топлинната мощност на тока.
+\[
+\delta Q = d A = - I U d t
+\]
+
+\[
+\delta Q = \VEC{J} \, d \VEC{S} \, \VEC{E} \, d \VEC{l} \, d t \,\,\, \Rightarrow \,\,\, 
+\VEC{J} \, \VEC{E} = \frac{\delta Q}{d \VEC{S} \, d \VEC{l} \, d t} = \frac{d P}{d V} \,\,\, \Rightarrow \,\,\, 
+\frac{d P}{d V} = \gamma E^2 = \rho J^2
+\]
+
+Първи закон на Кирхоф - алгебричната сума на токовете \( I_k \), които се събират в една възлова точка, е равна на нула.
+\[ 
+\sum_{k = 1}^{n} I_k = 0
+\]
+
+Втори закон на Кирхоф - във всеки един затворен проводников контур алгебричната сума на 
+напреженията \( U_k \) и електродвижещите напрежения \( E_k \) в контура са равни на алгебричната сума на 
+произведенията на токовете \( I_k \) по съпротивленията \( R_k \) на товарите.
+\[ 
+\sum_{k = 1}^{n} U_k + \sum_{k = 1}^{n} E_k = \sum_{k = 1}^{n} I_k R_k
+\]
+</div>
+
+
+<!-- Магнитостатично поле -->
+<h2>Магнитостатично поле</h2>
+<div>
+Магнитна проницаемост във вакуум \( \mu_0 \) \( [\frac{H}{m}] \) \( [\frac{N}{A^2}] \) (Магнитната константа)
+\[ \mu_0 = 4 \pi 10^{-7} \]
+
+Относителна магнитна проницаемост \( \mu_r \), за вакуум \( \mu_r = 1 \), 
+за диамагнетик (материал формиращ противоположно магнитно поле на външното) \( 0 \leq \mu_r < 1 \), а за 
+парамагнетик (материал формиращ релативно магнитно поле на външното) \( \mu_r > 1 \)
+\[
+\chi_m = \mu_r - 1 
+\]
+
+Абсолютна магнитна проницаемост \( \mu \) \( [\frac{H}{m}] \) \( [\frac{N}{A^2}] \) е мярка за способността на материала 
+да поддържа образуването на магнитно поле в него. Показва степента на магнетизация, която материала получава 
+в отговор на приложено външно магнитно поле. 
+\[
+\mu = \mu_0 \mu_r
+\]
+
+Токов елемент \( i \, d \VEC{l} \) е елементарен източник на магнитно поле. Той представлява проводящ участък 
+с елементарна дължина \( d \VEC{l} \) от затворен проводящ контур, в който под действието на източник на енергия 
+протича токът \( i \).
+\[
+
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticInduction', Phys.magneticInduction);" />
+Магнитна индукция \( \VEC{B} \) \( [T] \) \( [\frac{N}{Am}] \). Магнитно поле на постоянен ток (Закон на Био-Савар - Лаплас). 
+Зависи от магнитните свойства на материала (\( \mu \))
+<div id="magneticInduction"></div>
+\[
+d \VEC{B} = k \frac{i \, d \VEC{l} \times \UVEC{r}}{r^2} = \frac{\mu}{4 \pi} \frac{i \, d \VEC{l} \times \UVEC{r}}{r^2}
+\]
+
+Коефициент на пропорционалност \( k \) \( [\frac{H}{m}] \) \( [\frac{N}{A^2}] \)
+\[ k = \frac{\mu}{4 \pi} \]
+
+Единичен вектор \( \UVEC{r} \) сочещ от токовия елемента \( i \, d \VEC{l} \) до точката на измерване
+\[ \UVEC{r} = \frac{\VEC{r}}{r} \]
+
+Съгласно принципа на суперпозицията индукцията \( \VEC{B} \) на магнитното поле в дадена точка е 
+сума (интеграл) от индукцийте на полетата на всички токови елементи \( i \, d \VEC{l} \), на които
+е разделен проводникът \( l \).
+\[
+\VEC{B} = \int_l d \VEC{B} = \frac{\mu}{4 \pi} \int_l \frac{i \, d \VEC{l} \times \UVEC{r}}{r^2}
+\]
+
+Сила \( \VEC{F} \) \( [N] \) на взаимодействие на два токови елемента \( i \, d \VEC{l} \) (Закон на Био-Савар - Лаплас)
+\[
+d \VEC{F} = \frac{\mu}{4 \pi} \frac{i_1 \, d \VEC{l}_1 \times (i_2 \, d \VEC{l}_2 \times \UVEC{r})}{r^2} 
+= i_1 \, d \VEC{l}_1 \times d \VEC{B}_2
+\]
+
+Сила \( \VEC{F} \) \( [N] \) на действие на магнитно поле върху движещ се в него електричеки заряд \( q \) (Сила на Лоренц)
+\[
+d \VEC{F} = \frac{d t}{d t} i_1 \, d \VEC{l}_1 \times d \VEC{B}_2 = i_1 d t \, \frac{d \VEC{l}_1}{d t} \times d \VEC{B}_2 
+= d q_1 \, \VEC{v}_1 \times d \VEC{B}_2
+\]
+\[
+\VEC{F} = q \, \VEC{v} \times \VEC{B}
+\]
+
+Сила \( \VEC{F} \) \( [N] \) на действие на електрическо и магнитно поле върху движещ се в тях електричеки заряд \( q \) (Лоренцова сила)
+\[
+\VEC{F} = q \, \VEC{E} + q \, \VEC{v} \times \VEC{B}
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('workOfMagneticField', Phys.workOfMagneticField);" />
+Работа \( A \) \( [J] \) \( [Nm] \) при преместване на ток в магнитно поле
+<div id="workOfMagneticField"></div>
+\[
+d A = \VEC{F} \, d \VEC{r} = i \, d \VEC{l} \times d \VEC{B} \, d \VEC{r} = i \, d \VEC{B} \, d \VEC{S} = i \, d \Phi_B
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticFlux', Phys.magneticFlux);" />
+Поток \( \Phi_B \) \( [Wb] \) \( [Tm^2] \) на магнитната индукция \( \VEC{B} \) преминаващ през повърхността \( S \)
+<div id="magneticFlux"></div>
+\[
+\Phi_B = \iint_S d \Phi_B = \iint_S \VEC{B} \, d \VEC{S}
+\]
+
+Поток \( \Phi_B \) \( [Wb] \) \( [Tm^2] \) на магнитната индукция \( \VEC{B} \) преминаващ през затворената повърхност \( S \) (Закон на Гаус) 
+\[
+\Phi_B = \oint_S d \Phi_B = \OIINT{S} \VEC{B} \, d \VEC{S} = \iiint_V \BVEC{\nabla} \, \VEC{B} \, d V = 0
+\]
+\[
+\BVEC{\nabla} \, \VEC{B} = 0
+\]
+
+Пълен поток \( \Psi \) \( [Wb] \) \( [Tm^2] \) на магнитната индукция \( \VEC{B} \) преминаващ през \( N \) токови контура
+\[
+\Psi = N \Phi_B
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticInductionLine', Phys.magneticInductionLine);" />
+Магнитна индукция \( B \) на поле на безкреан праволинеен ток на разстояние \( d \)
+<div id="magneticInductionLine"></div>
+\[
+B = \frac{\mu i}{2 \pi d}
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticInductionCircle', Phys.magneticInductionCircle);" />
+Магнитна индукция \( B \) на поле на кръгов ток с радуис \( R \)
+<div id="magneticInductionCircle"></div>
+\[
+B = \frac{\mu i}{2 R}
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticInductionCirculationIn', Phys.magneticInductionCirculationIn);" />
+Циркулация на магнитната индукция \( \VEC{B} \) по затворен контур обхващащ тока (Закон на Ампер)
+<div id="magneticInductionCirculationIn"></div>
+\[
+\oint_l \VEC{B} \, d \VEC{l} 
+= \oint_l B \, d l \, \cos{\alpha} 
+= \int_{0}^{2 \pi} \frac{\mu i}{2 \pi R} R \, d \varphi
+= \frac{\mu i}{2 \pi} \int_{0}^{2 \pi} d \varphi
+= \mu i
+\]
+\[
+\oint_l \VEC{B} \, d \VEC{l} = \mu \sum i
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticInductionCirculationOut', Phys.magneticInductionCirculationOut);" />
+Циркулация на магнитната индукция \( \VEC{B} \) по затворен контур не обхващащ тока (Закон на Ампер)
+<div id="magneticInductionCirculationOut"></div>
+\[
+\oint_l \VEC{B} \, d \VEC{l} 
+= \oint_l B \, d l \, \cos{\alpha} 
+= \int_{1}^{2} B \, d l \, \cos{\alpha} + \int_{2}^{1} B \, d l \, \cos{\alpha} 
+= \frac{\mu i}{2 \pi} \int_{\varphi_1}^{\varphi_2} d \varphi + \frac{\mu i}{2 \pi} \int_{\varphi_2}^{\varphi_1} d \varphi
+= 0
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticInductionCirculationSolenoid', Phys.magneticInductionCirculationSolenoid);" />
+Циркулация на магнитната индукция \( \VEC{B} \) на полето на безкрайно дълъг соленоид. Участък 1-2 се намира в соленоида, 
+участък 2-3 и 4-1 са савни на \( 0 \), защото за тях \( \VEC{B} \) е перпендикулярна на \( d \VEC{l} \), а участък 3-4 
+може да се счита, че е достатъчно далеч от соленоида, където \( B \approx 0 \).
+<div id="magneticInductionCirculationSolenoid"></div>
+\[
+\oint_l \VEC{B} \, d \VEC{l} 
+= \int_{1}^{2} \VEC{B} \, d \VEC{l} 
++ \int_{2}^{3} \VEC{B} \, d \VEC{l} 
++ \int_{3}^{4} \VEC{B} \, d \VEC{l} 
++ \int_{4}^{1} \VEC{B} \, d \VEC{l} 
+= \int_{1}^{2} \VEC{B} \, d \VEC{l} 
+= B l
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticInductionSolenoid', Phys.magneticInductionSolenoid);" />
+Магнитна индукция \( B \) на безкрайно дълъг соленоид, \( N \) е броя на навивките, а вектора на индукцията е нсочен по дължината \( l \) на соленоида.
+<div id="magneticInductionSolenoid"></div>
+\[
+B = \frac{\mu N i}{2l} (\frac{l_2}{\sqrt{R^2 + l^{2}_2}} + \frac{l_1}{\sqrt{R^2 + l^{2}_1}})
+\]
+\[
+B = \frac{\mu N i}{l}
+\]
+
+Магнитен интензитет \( \VEC{H} \) \( [\frac{A}{m}] \). Не зависи от магнитните свойства на материала (\( \mu \))
+\[ 
+\VEC{H} = \frac{\VEC{B}}{\mu} \,\,\,\,\,\,\,\,\, \VEC{B} = \mu \VEC{H}
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('magneticIntensityCirculation', Phys.magneticIntensityCirculation);" />
+Циркулация на магнитен интензитет \( \VEC{H} \) по затворен контур обхващащ (може и частично) тока (Първо уравнение на Максуел)
+<div id="magneticIntensityCirculation"></div>
+\[
+\oint_l \VEC{H} \, d \VEC{l} 
+= \oint_l \frac{\VEC{B}}{\mu} \, d \VEC{l} 
+= \frac{1}{\mu} \oint_l \VEC{B} \, d \VEC{l} 
+= i
+= \iint_S \VEC{J} \, d \VEC{S}
+\]
+\[
+\oint_l \VEC{H} \, d \VEC{l} 
+= \iint_S \BVEC{\nabla} \times \VEC{H} \, d \VEC{S}
+\]
+\[
+\BVEC{\nabla} \times \VEC{H} = \VEC{J}
+\]
+
+Консервативно (потенциално) магнитно поле
+\[
+\BVEC{\nabla} \times \VEC{H} = \VEC{J} = 0 \,\,\, \Rightarrow \,\,\, \oint_l \VEC{H} \, d \VEC{l} = 0
+\]
+
+Вихрово магнитно поле
+\[
+\BVEC{\nabla} \times \VEC{H} = \VEC{J} \neq 0 \,\,\, \Rightarrow \,\,\, \oint_l \VEC{H} \, d \VEC{l} \neq 0
+\]
+
+Магнитен вектор-потенциал \( \VEC{A} (\VEC{r}) \). Всички векторни полета с дивергенция, тържествено равна на нула, 
+може да се дефиниерат чрез спомагателна вектор функция.
+\[
+\BVEC{\nabla} \, \VEC{B} = \BVEC{\nabla} (\BVEC{\nabla} \times \VEC{A}) 
+= \VEC{A} (\BVEC{\nabla} \times \BVEC{\nabla}) = 0 \,\,\, \Rightarrow \,\,\, 
+\VEC{B} = \BVEC{\nabla} \times \VEC{A} 
+\]
+
+Скаларен магнитен потенциал \( \psi (\VEC{r}) \)
+\[
+\BVEC{\nabla} \times \VEC{H} = \VEC{J} = 0
+\]
+\[
+\BVEC{\nabla} \times \VEC{H} = \BVEC{\nabla} \times (- \BVEC{\nabla} \psi) = 0 \,\,\, \Rightarrow \,\,\, 
+\VEC{H} = - \BVEC{\nabla} \psi
+\]
+
+Ефект на Хол се нарича явлението на възникване на напречно ориентирано електрично поле (електродвижещо напрежение), 
+при поставянето на проводник с протичащ по него постоянен ток в магнитно поле. 
+\[
+\]
+
+Електромагнитна индукция (Индуцирано ЕДН, Induced EMF) \( \EPSILON \). Големината на индуцираното в проводников контур ЕДН
+е равно на скоростта, с която се изменя магнитния поток \( \frac{d \Phi_B}{d t} \) през повърхността \( d S \), 
+заградена от контура. Броя на навивките \( N \) се взима под внимание когато те са еднакви и през тях минава един и същ 
+магнитен поток \( d \Phi_B \). С повишаване на относителната магнитна проницаемост \( \mu_r \) се повишава
+магнитния поток и неговата скорост, но се намалява тока и неговата скорост, както при самоиндукция.
+\[
+\EPSILON = - N \frac{d \Phi_B}{d t}
+\]
+
+Правило на Ленц: Посоката на индуцирания ток в затворен проводников контур е такава, че магнитното поле на тока се противопоставя на 
+изменението на магнитния поток, което поражда този ток. Индуцираният ток винаги се стреми да запази първоначалния магнитен поток през контура.
+\[
+\]
+
+Вихрови токове (Токове на Фуко) (Токове на Еди) са индуцирани токове вътре в самия проводник. \( \EPSILON \) е ЕДН, а
+\( R \) е съпротивлението на веригата на вихровия ток. Вихровите токове са толкова по-силни, колко по-бързо се мени магнитното поле.
+\[
+i_B = \frac{\EPSILON}{R} = - \frac{1}{R} \frac{d \Phi_B}{d t}
+\]
+
+
+Back EMF: A motor acts as generator. Когато мотор се върти, движещото му се магнитно поле индуцира напрежение 
+в навивките и действа като генератор в обратна посока на тока който го е индуцирал.
+\[
+\]
+
+Самоиндукция \( L \) \( [H] \) \( [\frac{Wb}{A}] \) е явление, при което промяната на тока в един проводник 
+индуцира ЕДН в същия проводник. Индуктивността \( L \) зависи от геометричните характеристики на електромагнита. 
+При феритни сърцевини с по-голяма относителна магнитна проницаемост \( \mu_r \) 
+се наблюдава повишен поток \( \Phi_B \), повишена скорост на изменение на потока \( \frac{d \Phi_B}{d t} \) и 
+повишена индуктивност \( L \), но за сметка на това се наблюдава пропорцианално намален ток \( i \) и 
+намалена скоростта на изменение на тока \( d i / d t \).
+\[
+\EPSILON_L = - N \frac{d \Phi_B}{d t} = - N \frac{d}{d t} \iint_S \VEC{B} \, d \VEC{S} = - L \frac{d i}{d t}
+\]
+\[
+L = N \frac{d \Phi_B}{d i} = \left|\frac{\EPSILON_L}{d i / d t}\right|
+\]
+\[
+\Psi = L i
+\]
+
+Взаимна индукция \( M \) \( [H] \) \( [\frac{Wb}{A}] \) е явление, при което в единия
+от два токови контура, разположени на близко разстояние един от друг, възниква ЕДН вследствие изменението 
+на големината на тока в другия контур. \( d \Phi_{B_{12}} \) е магнитния поток през една навивка на 
+бобина №1 породен от ток \( i_2 \). \( d \Phi_{B_{21}} \) е магнитния поток през една навивка на 
+бобина №2 породен от ток \( i_1 \). \( k \) е коефициент на магнитна връзка, при \( k = 0 \) между намотките няма
+индуктивна връзка, а при \( k = 1 \) няма потоци на разсейване и индуктивната връзка е максимална.
+\[
+\EPSILON_{L_1} = - N_1 \frac{d \Phi_{B_{12}}}{d t} 
+= - N_1 \frac{d}{d t} \iint_{S_1} \VEC{B}_2 \, d \VEC{S} = - M_{12} \frac{d i_2}{d t}
+\]
+\[
+\EPSILON_{L_2} = - N_2 \frac{d \Phi_{B_{21}}}{d t} 
+= - N_2 \frac{d}{d t} \iint_{S_2} \VEC{B}_1 \, d \VEC{S} = - M_{21} \frac{d i_1}{d t}
+\]
+\[
+M_{12} = N_1 \frac{d \Phi_{B_{12}}}{d i_2}
+\]
+\[
+M_{21} = N_2 \frac{d \Phi_{B_{21}}}{d i_1}
+\]
+\[
+M_{12} = M_{21} = M = k \sqrt{L_1 \, L_2}
+\]
+\[
+\Psi_1 = L_1 i_1 \pm M_{12} i_2
+\]
+\[
+\Psi_2 = L_2 i_2 \pm M_{21} i_1
+\]
+
+Магнитна енергия \( W_B \) съхранена в намотка с индуктивност \( L \) при нарастване на тока от нула до \( I \)
+\[
+W_B = \int_0^{W_B} d W_B = \int_0^I L \frac{d I}{d t} (I d t) = \int_0^I L I d I = L \int_0^I I d I = \frac{1}{2} L I^2
+\]
+
+Моментно напрежение \( u \) и мощност \( p \) през индуктивен елемент с индукция \( L \) и преминаващ през него ток \( i \)
+\[
+u = L \frac{d i}{d t} \,\,\,\,\,\,\,\,\, p = i u
+\]
+</div>
+
+
+<!-- Схемотехника -->
+<h2>Схемотехника</h2>
+<div>
+Зареждане на L/R последователна верига с постоянно напрежение \( U \). 
+С увеличавене на индуктивността \( L \) се увеличава времето \( t \) за нейното пълно зареждане.
+Колкото повече време се зарежда един индуктор толкова повече енергия се губи през съпротивлението на веригата и индуктора.
+Най-голяма оптималност при зареждане на индуктор има до \( \tau \) секунди когато и заредената енергия в индуктора и 
+загубите през съпротивлението са еднакви!
+\[
+U = u_R + u_L = R i + L \frac{d i}{d t}
+\]
+\[
+\tau = \frac{L}{R} \,\,\, \Rightarrow \,\,\, const = 5 \tau
+\]
+\[
+i(t) = \frac{U}{R}(1 - e^{-\frac{t}{\tau}})
+\]
+\[
+u_R(t) = U(1 - e^{-\frac{t}{\tau}})
+\]
+\[
+u_L(t) = Ue^{-\frac{t}{\tau}}
+\]
+\[
+W = \int_0^{n \tau} i(t) U d t 
+= \int_0^{n \tau} \frac{U^2}{R}(1 - e^{-\frac{t}{\tau}}) d t 
+= \frac{U^2}{R}(\tau e^{-\frac{t}{\tau}} + t) \left| \begin{array}{c} n \tau \\ 0 \end{array} \right. 
+= (e^{-n} + n - 1) L I^2
+\]
+\[
+W_B = \int_0^{5 \tau} i(t) u_L(t) d t 
+= \int_0^{5 \tau} \frac{U^2}{R}e^{-\frac{t}{\tau}}(1 - e^{-\frac{t}{\tau}}) d t 
+= \frac{\tau U^2}{2R}(1 - e^{-\frac{t}{\tau}})^2 \left| \begin{array}{c} 5 \tau \\ 0 \end{array} \right. 
+= \frac{1}{2} L I^2
+\]
+
+Разреждане на L/R последователна верига
+\[
+0 = u_R + u_L = R i + L \frac{d i}{d t}
+\]
+
+Зареждане на RC последователна верига с постоянно напрежение \( U \)
+\[
+U = u_R + u_C = R i + u_C = R C \frac{d u_C}{d t} + u_C
+\]
+\[
+\tau = R C \,\,\, \Rightarrow \,\,\, const = 5 \tau
+\]
+\[
+u_C(t) = U(1 - e^{-\frac{t}{\tau}})
+\]
+\[
+u_R(t) = Ue^{-\frac{t}{\tau}}
+\]
+\[
+i(t) = \frac{U}{R}e^{-\frac{t}{\tau}}
+\]
+\[
+W = \int_0^{5 \tau} i(t) U d t 
+= \int_0^{5 \tau} \frac{U^2}{R}e^{-\frac{t}{\tau}} d t 
+= - \frac{\tau U^2}{R}e^{-\frac{t}{\tau}} \left| \begin{array}{c} 5 \tau \\ 0 \end{array} \right. 
+= C U^2
+\]
+\[
+W_E = \int_0^{5 \tau} i(t) u_C(t) d t 
+= \int_0^{5 \tau} \frac{U^2}{R}e^{-\frac{t}{\tau}}(1 - e^{-\frac{t}{\tau}}) d t 
+= \frac{\tau U^2}{2R}(1 - e^{-\frac{t}{\tau}})^2 \left| \begin{array}{c} 5 \tau \\ 0 \end{array} \right. 
+= \frac{1}{2} C U^2
+\]
+
+Разреждане на RC последователна верига
+\[
+0 = u_R + u_C = R i + u_C = R C \frac{d u_C}{d t} + u_C
+\]
+</div>
+
+
+
+
+<!--  
+	Математика
+-->
+<h1>Математика</h1>
+
+
+<!-- Производна, диференциал и интеграл -->
+<h2>Производна, диференциал и интеграл</h2>
+<div>
+Производна е отношението на нарастването (диференциала) на \( y \) спрямо \( x \) (rate of change)
+\[
+y'(x) = \frac{y(x + d x) - y(x)}{d x} = \frac{d y}{d x}
+\]
+
+Интеграл е обратната операция \( = \) сумата от диференциалите
+\[
+\int y'(x) d x = \int d y = y = \sum \Delta y = \sum y'(x) \Delta x
+\]
+</div>
+
+
+<!-- Векторен анализ -->
+<h2>Векторен анализ</h2>
+<div>
+Скаларно произведение на вектори (dot product)
+\[ \VEC{A} \, \VEC{B} = \parallel \VEC{A} \parallel \, \parallel \VEC{B} \parallel \cos{\theta} \]
+
+Векторно произведение на вектори (cross product)
+\[ \VEC{A} \times \VEC{B} = \parallel \VEC{A} \parallel \, \parallel \VEC{B} \parallel \sin{\theta} \, \UVEC{n} \]
+
+Смесено произведение на вектори (triple product)
+\[ \VEC{A} (\VEC{B} \times \VEC{C}) = \VEC{B} (\VEC{C} \times \VEC{A}) = \VEC{C} (\VEC{A} \times \VEC{B}) \]
+
+Набла (дел) \( \BVEC{\nabla} \)
+\[ \BVEC{\nabla} = \UVEC{i}\frac{\partial}{\partial x} + \UVEC{j}\frac{\partial}{\partial y} + \UVEC{k}\frac{\partial}{\partial z} \]
+
+Градиент (наклон, стръмност) \( \BVEC{\nabla} f \)
+\[ \BVEC{\nabla} f = \UVEC{i}\frac{\partial f}{\partial x} + \UVEC{j}\frac{\partial f}{\partial y} + \UVEC{k}\frac{\partial f}{\partial z} \]
+
+Дивергенция (отклонение) \( \BVEC{\nabla} \, \VEC{F} \)
+\[ 
+\BVEC{\nabla} \, \VEC{F} 
+= \UVEC{i}\frac{\partial \VEC{F}}{\partial x} + \UVEC{j}\frac{\partial \VEC{F}}{\partial y} + \UVEC{k}\frac{\partial \VEC{F}}{\partial z}
+= \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z} 
+\]
+
+Циркулация \( \BVEC{\nabla} \times \VEC{F} \)
+\[
+\BVEC{\nabla} \times \VEC{F}
+= \UVEC{i} (\frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z})
++ \UVEC{j} (\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x})
++ \UVEC{k} (\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y})
+\]
+
+Връзка между затворен повърхнинен интеграл и дивергенция (отклонение) (Теорема на Гаус)
+\[ 
+\OIINT{S} \VEC{F} \, d \VEC{S} = \OIINT{S} \VEC{F} \, \UVEC{n} \, d S 
+= \iiint_V \BVEC{\nabla} \, \VEC{F} \, d V 
+\]
+
+Връзка между затворен криволинеен интеграл и циркулация (Теорема на Стокс)
+\[ 
+\oint_C \VEC{F} \, d \VEC{r} = \oint_C \VEC{F} \, \UVEC{\tau} \, d r
+= \iint_S \BVEC{\nabla} \times \VEC{F} \, d \VEC{S} = \iint_S \BVEC{\nabla} \times \VEC{F} \, \UVEC{n} \, d S 
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('divergence', Phys.divergence);" />
+Дивергенция (отклонение) от точка. Ако дивергенцията на векторното поле е \( 0 \) то линийте на полето са затворени и непрекъснати. 
+Ако дивергенцията на векторното поле е различно от \( 0 \) то линийте на полето не са затворени.
+<div id="divergence"></div>
+\[ 
+\OIINT{S} \VEC{F} \, d \VEC{S} = \OIINT{S} \VEC{F} \, \UVEC{n} \, d S
+\]
+
+\[ 
+= \iint_{S:x+} \VEC{F} \, \UVEC{n} \, d S 
++ \iint_{S:x-} \VEC{F} \, \UVEC{n} \, d S 
++ \iint_{S:y+} \VEC{F} \, \UVEC{n} \, d S 
++ \iint_{S:y-} \VEC{F} \, \UVEC{n} \, d S 
++ \iint_{S:z+} \VEC{F} \, \UVEC{n} \, d S 
++ \iint_{S:z-} \VEC{F} \, \UVEC{n} \, d S 
+\]
+
+\[ 
+= \iint_{S:x+} \VEC{F} \, \UVEC{i} \, d S 
++ \iint_{S:x-} \VEC{F} \, (-\UVEC{i}) \, d S 
++ \iint_{S:y+} \VEC{F} \, \UVEC{j} \, d S 
++ \iint_{S:y-} \VEC{F} \, (-\UVEC{j}) \, d S 
++ \iint_{S:z+} \VEC{F} \, \UVEC{k} \, d S 
++ \iint_{S:z-} \VEC{F} \, (-\UVEC{k}) \, d S   
+\]
+
+\[ 
+= \iint_{S:x+} F_x \, d S 
+- \iint_{S:x-} F_x \, d S 
++ \iint_{S:y+} F_y \, d S 
+- \iint_{S:y-} F_y \, d S 
++ \iint_{S:z+} F_z \, d S 
+- \iint_{S:z-} F_z \, d S   
+\]
+
+\[ 
+= F_x(x + \frac{\Delta x}{2}, y, z) \Delta y \, \Delta z
+- F_x(x - \frac{\Delta x}{2}, y, z) \Delta y \, \Delta z
+\]
+
+\[ 
++ F_y(x, y + \frac{\Delta y}{2}, z) \Delta x \, \Delta z
+- F_y(x, y - \frac{\Delta y}{2}, z) \Delta x \, \Delta z
+\]
+
+\[ 
++ F_z(x, y, z + \frac{\Delta z}{2}) \Delta y \, \Delta x
+- F_z(x, y, z - \frac{\Delta z}{2}) \Delta y \, \Delta x
+\]
+
+\[
+= \frac{F_x(x + \frac{\Delta x}{2}, y, z) - F_x(x - \frac{\Delta x}{2}, y, z)}{\Delta x} \Delta x \, \Delta y \, \Delta z
+\]
+
+\[
++ \frac{F_y(x, y +  \frac{\Delta y}{2}, z) - F_y(x, y - \frac{\Delta y}{2}, z)}{\Delta y} \Delta x \, \Delta y \, \Delta z
+\]
+
+\[
++ \frac{F_z(x, y, z + \frac{\Delta z}{2}) - F_z(x, y, z - \frac{\Delta z}{2})}{\Delta z} \Delta x \, \Delta y \, \Delta z
+\]
+
+<!-- теорема на дивергенцията -->
+\[ \, \]
+
+\[ 
+\lim_{\Delta V \to 0} \frac{1}{\Delta V} \OIINT{S} \VEC{F} \, \UVEC{n} \, d S
+\]
+
+\[
+= \lim_{\Delta x \to 0} \frac{F_x(x + \frac{\Delta x}{2}, y, z) - F_x(x - \frac{\Delta x}{2}, y, z)}{\Delta x}
+\]
+
+\[
++ \lim_{\Delta y \to 0} \frac{F_y(x, y +  \frac{\Delta y}{2}, z) - F_y(x, y - \frac{\Delta y}{2}, z)}{\Delta y}
+\]
+
+\[
++ \lim_{\Delta z \to 0} \frac{F_z(x, y, z + \frac{\Delta z}{2}) - F_z(x, y, z - \frac{\Delta z}{2})}{\Delta z}
+\]
+
+\[
+= \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z} = \BVEC{\nabla} \, \VEC{F}
+\]
+
+<div class="indent">
+<img class="img-drawing" onclick="Drawing.Scene.render('sumOfDivergence', Phys.sumOfDivergence);" />
+Потока на произволна векторна функция \( \VEC{F} \) през повърхността \( S \) 
+е равна на сумата от потоците през повърхностите \( S_i \) на обемите \( \Delta V_i \) на които е разделен обема \( V \) обхванат от \( S \).
+Потоците през общата стена на два \( \Delta V_i \) са еднакви но с противоположна посока и се самоунищожават, 
+затова нетно в сумата от потоците влизат само онези стени от \( S_i \) които са общи със \( S \) потвърждавайки горното твърдение:
+<div id="sumOfDivergence"></div>
+</div>
+\[ 
+\OIINT{S} \VEC{F} \, \UVEC{n} \, d S = \sum_{i = 1}^{n} \OIINT{S_i} \VEC{F} \, \UVEC{n} \, d S
+\]
+
+\[
+= \lim_{n \to \infty}_{\Delta V_i \to 0} \,\, \sum_{i = 1}^{n} \lgroup \frac{1}{\Delta V_i} \OIINT{S_i} \VEC{F} \, \UVEC{n} \, d S \rgroup \Delta V_i
+\]
+
+\[
+= \lim_{n \to \infty}_{\Delta V_i \to 0} \,\, \sum_{i = 1}^{n} \lgroup \BVEC{\nabla} \, \VEC{F} \rgroup_i \, \Delta V_i
+= \iiint_V \BVEC{\nabla} \, \VEC{F} \, d V
+\]
+
+<img class="img-drawing" onclick="Drawing.Scene.render('circulation', Phys.circulation);" />
+Циркулация около точка. Ако циркулацията на векторното поле е \( 0 \) то полето е консервативно (потенциално). 
+Ако циркулацията на векторното поле е различно от \( 0 \) то полето е вихрово. 
+<div id="circulation"></div>
+<p class="indent">Компонента на \( \VEC{F} \) която извършва работа е онази която действа по кривата \( C \), а именно компонентата по направление на тангентата \( \UVEC{\tau} \)</p>
+\[ 
+\oint_C \VEC{F} \, d \VEC{r} = \oint_C \VEC{F} \, \UVEC{\tau} \, d r
+= \oint_{C:xy} \VEC{F} \, \UVEC{\tau} \, d r + \oint_{C:zx} \VEC{F} \, \UVEC{\tau} \, d r + \oint_{C:yz} \VEC{F} \, \UVEC{\tau} \, d r
+\]
+
+\[ \, \]
+<p class="indent">
+Цирколация по равнината \( xy \); нормала на равнината е \( \UVEC{k} \) по направление \( z \); \( x- \) и \( y- \) са с отрицателен знак, 
+защото циркулацията се извършва в посока обратна на нарастването съответно на \( \Delta x \) и \( \Delta y \)
+</p>
+
+\[ 
+\oint_{C:xy} \VEC{F} \, \UVEC{\tau} \, d r 
+= \oint_{C:x+} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:y+} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:x-} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:y-} \VEC{F} \, \UVEC{\tau} \, d r
+\]
+
+\[ 
+= \oint_{C:x+} F_x \, d x
++ \oint_{C:y+} F_y \, d y
++ \oint_{C:x-} F_x \, d x
++ \oint_{C:y-} F_y \, d y
+\]
+
+\[ 
+= F_x (x, y - \frac{\Delta y}{2}, z) \Delta x
++ F_y (x + \frac{\Delta x}{2}, y, z) \Delta y
+- F_x (x, y + \frac{\Delta y}{2}, z) \Delta x
+- F_y (x - \frac{\Delta x}{2}, y, z) \Delta y
+\]
+
+\[ 
+= - \lgroup F_x (x, y + \frac{\Delta y}{2}, z) - F_x (x, y - \frac{\Delta y}{2}, z) \rgroup \Delta x
++ \lgroup F_y (x + \frac{\Delta x}{2}, y, z) - F_y (x - \frac{\Delta x}{2}, y, z) \rgroup \Delta y
+\]
+
+\[ 
+= - \frac{F_x (x, y + \frac{\Delta y}{2}, z) - F_x (x, y - \frac{\Delta y}{2}, z)}{\Delta y} \Delta x \Delta y
++ \frac{F_y (x + \frac{\Delta x}{2}, y, z) - F_y (x - \frac{\Delta x}{2}, y, z)}{\Delta x} \Delta x \Delta y
+\]
+
+\[
+\lim_{\Delta S \to 0} \frac{1}{\Delta S} \oint_{C:xy} \VEC{F} \, \UVEC{\tau} \, d r
+= \lim_{\Delta x \to 0} \frac{F_y (x + \frac{\Delta x}{2}, y, z) - F_y (x - \frac{\Delta x}{2}, y, z)}{\Delta x}
+- \lim_{\Delta y \to 0} \frac{F_x (x, y + \frac{\Delta y}{2}, z) - F_x (x, y - \frac{\Delta y}{2}, z)}{\Delta y} 
+= \frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}
+\]
+
+\[ \, \]
+<p class="indent">
+Цирколация по равнината \( zx \); нормала на равнината е \( \UVEC{j} \) по направление \( y \); \( z- \) и \( x- \) са с отрицателен знак, 
+защото циркулацията се извършва в посока обратна на нарастването съответно на \( \Delta z \) и \( \Delta x \)
+</p>
+
+\[ 
+\oint_{C:zx} \VEC{F} \, \UVEC{\tau} \, d r 
+= \oint_{C:z+} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:x+} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:z-} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:x-} \VEC{F} \, \UVEC{\tau} \, d r
+\]
+
+\[ 
+= \oint_{C:z+} F_z \, d z
++ \oint_{C:x+} F_x \, d x
++ \oint_{C:z-} F_z \, d z
++ \oint_{C:x-} F_x \, d x
+\]
+
+\[ 
+= F_z (x - \frac{\Delta x}{2}, y, z) \Delta z
++ F_x (x, y, z + \frac{\Delta z}{2}) \Delta x
+- F_z (x + \frac{\Delta x}{2}, y, z) \Delta z
+- F_x (x, y, z - \frac{\Delta z}{2}) \Delta x
+\]
+
+\[ 
+= - \lgroup F_z (x + \frac{\Delta x}{2}, y, z) - F_z (x - \frac{\Delta x}{2}, y, z) \rgroup \Delta z
++ \lgroup F_x (x, y, z + \frac{\Delta z}{2}) - F_x (x, y, z - \frac{\Delta z}{2}) \rgroup \Delta x
+\]
+
+\[ 
+= - \frac{F_z (x + \frac{\Delta x}{2}, y, z) - F_z (x - \frac{\Delta x}{2}, y, z)}{\Delta x} \Delta z \Delta x
++ \frac{F_x (x, y, z + \frac{\Delta z}{2}) - F_x (x, y, z - \frac{\Delta z}{2})}{\Delta z} \Delta z \Delta x
+\]
+
+\[
+\lim_{\Delta S \to 0} \frac{1}{\Delta S} \oint_{C:zx} \VEC{F} \, \UVEC{\tau} \, d r
+= \lim_{\Delta z \to 0} \frac{F_x (x, y, z + \frac{\Delta z}{2}) - F_x (x, y, z - \frac{\Delta z}{2})}{\Delta z}
+- \lim_{\Delta x \to 0} \frac{F_z (x + \frac{\Delta x}{2}, y, z) - F_z (x - \frac{\Delta x}{2}, y, z)}{\Delta x} 
+= \frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x}
+\]
+
+\[ \, \]
+<p class="indent">
+Цирколация по равнината \( yz \); нормала на равнината е \( \UVEC{i} \) по направление \( x \); \( y- \) и \( z- \) са с отрицателен знак, 
+защото циркулацията се извършва в посока обратна на нарастването съответно на \( \Delta y \) и \( \Delta z \)
+</p>
+
+\[ 
+\oint_{C:yz} \VEC{F} \, \UVEC{\tau} \, d r 
+= \oint_{C:y+} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:z+} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:y-} \VEC{F} \, \UVEC{\tau} \, d r
++ \oint_{C:z-} \VEC{F} \, \UVEC{\tau} \, d r
+\]
+
+\[ 
+= \oint_{C:y+} F_x \, d y
++ \oint_{C:z+} F_y \, d z
++ \oint_{C:y-} F_x \, d y
++ \oint_{C:z-} F_y \, d z
+\]
+
+\[ 
+= F_y (x, y, z - \frac{\Delta z}{2}) \Delta y
++ F_z (x, y + \frac{\Delta y}{2}, z) \Delta z
+- F_y (x, y, z + \frac{\Delta z}{2}) \Delta y
+- F_z (x, y - \frac{\Delta y}{2}, z) \Delta z
+\]
+
+\[ 
+= - \lgroup F_y (x, y, z + \frac{\Delta z}{2}) - F_y (x, y, z - \frac{\Delta z}{2}) \rgroup \Delta y
++ \lgroup F_z (x, y + \frac{\Delta y}{2}, z) - F_z (x, y - \frac{\Delta y}{2}, z) \rgroup \Delta z
+\]
+
+\[ 
+= - \frac{F_y (x, y, z + \frac{\Delta z}{2}) - F_y (x, y, z - \frac{\Delta z}{2})}{\Delta z} \Delta y \Delta z
++ \frac{F_z (x, y + \frac{\Delta y}{2}, z) - F_z (x, y - \frac{\Delta y}{2}, z)}{\Delta y} \Delta y \Delta z
+\]
+
+\[
+\lim_{\Delta S \to 0} \frac{1}{\Delta S} \oint_{C:yz} \VEC{F} \, \UVEC{\tau} \, d r
+= \lim_{\Delta y \to 0} \frac{F_z (x, y + \frac{\Delta y}{2}, z) - F_z (x, y - \frac{\Delta y}{2}, z)}{\Delta y}
+- \lim_{\Delta z \to 0} \frac{F_y (x, y, z + \frac{\Delta z}{2}) - F_y (x, y, z - \frac{\Delta z}{2})}{\Delta z}
+= \frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z}
+\]
+
+<!-- теорема на циркулацията -->
+\[ \, \]
+
+<p class="indent">
+Циркулация на \( \VEC{F} \) по затворена крива чиято нормала е \( \UVEC{n} \)
+</p>
+
+\[
+\lim_{\Delta S \to 0} \frac{1}{\Delta S} \oint_{C} \VEC{F} \, \UVEC{\tau} \, d r
+= \lim_{\Delta S \to 0} \frac{1}{\Delta S} \oint_{C:xy} \VEC{F} \, \UVEC{\tau} \, d r
++ \lim_{\Delta S \to 0} \frac{1}{\Delta S} \oint_{C:zx} \VEC{F} \, \UVEC{\tau} \, d r
++ \lim_{\Delta S \to 0} \frac{1}{\Delta S} \oint_{C:yz} \VEC{F} \, \UVEC{\tau} \, d r
+\]
+
+\[
+= \lgroup 
+  \UVEC{k} (\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y})
++ \UVEC{j} (\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x})
++ \UVEC{i} (\frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z})
+\rgroup \, \UVEC{n}
+= \BVEC{\nabla} \times \VEC{F} \, \UVEC{n}
+\]
+
+<!-- теорема на стоукс -->
+\[ \, \]
+
+<div class="indent">
+<img class="img-drawing" onclick="Drawing.Scene.render('sumOfCirculation', Phys.sumOfCirculation);" />
+Циркулацията на произволна векторна функция \( \VEC{F} \) по затворената крива \( C \) 
+е равна на сумата от циркулацийте по затворените криви \( C_i \) на повърхностите \( \Delta S_i \) 
+на които е разделена повърхността \( S \) обхващаща затворената крива \( C \).
+Циркулацийте през общата преграда на два \( \Delta S_i \) са еднакви но с противоположнна посока и се самоунищожават,
+затова нетно в сумата от циркулацийте влизат само онези прегради от \( C_i \) които са общи с \( C \) потвърждавайки горното твърдение:
+<div id="sumOfCirculation"></div>
+</div>
+
+
+
+\[
+\oint_{C} \VEC{F} \, \UVEC{\tau} \, d r = \sum_{i = 1}^{n} \oint_{C_i} \VEC{F} \, \UVEC{\tau} \, d r
+\]
+
+\[
+= \lim_{n \to \infty}_{\Delta S_i \to 0} \,\, \sum_{i = 1}^{n} \lgroup \frac{1}{\Delta S_i} \oint_{C_i} \VEC{F} \, \UVEC{\tau} \, d r \rgroup \Delta S_i
+\]
+
+\[
+= \lim_{n \to \infty}_{\Delta S_i \to 0} \,\, \sum_{i = 1}^{n} \lgroup \BVEC{\nabla} \times \VEC{F} \rgroup_i \, \UVEC{n}_i \, \Delta S_i
+= \iint_S \BVEC{\nabla} \times \VEC{F} \, \UVEC{n} \, d S
+\]
+
+\[ \, \]
+Консервативно (потенциално) поле и независимост на пътя от траекторията
+\[
+\VEC{F} 
+= \UVEC{i} \frac{\partial \psi}{\partial x} 
++ \UVEC{j} \frac{\partial \psi}{\partial y} 
++ \UVEC{k} \frac{\partial \psi}{\partial z}
+= \BVEC{\nabla} \psi
+\]
+
+\[ \, \]
+
+\[
+\BVEC{\nabla} \times \VEC{F}
+= \UVEC{i} (\frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z})
++ \UVEC{j} (\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x})
++ \UVEC{k} (\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y})
+\]
+
+\[
+= \UVEC{i} (\frac{\partial}{\partial y} (\frac{\partial \psi}{\partial z}) - \frac{\partial}{\partial z} (\frac{\partial \psi}{\partial y}))
++ \UVEC{j} (\frac{\partial}{\partial z} (\frac{\partial \psi}{\partial x}) - \frac{\partial}{\partial x} (\frac{\partial \psi}{\partial z}))
++ \UVEC{k} (\frac{\partial}{\partial x} (\frac{\partial \psi}{\partial y}) - \frac{\partial}{\partial y} (\frac{\partial \psi}{\partial x}))
+\]
+
+\[
+= \UVEC{i} (\frac{\partial \psi^2}{\partial y \partial z} - \frac{\partial \psi^2}{\partial y \partial z})
++ \UVEC{j} (\frac{\partial \psi^2}{\partial z \partial x} - \frac{\partial \psi^2}{\partial z \partial x})
++ \UVEC{k} (\frac{\partial \psi^2}{\partial x \partial y} - \frac{\partial \psi^2}{\partial x \partial y})
+= \VEC{0}
+\]
+
+\[ \, \]
+
+\[ 
+\oint_C \VEC{F} \, d \VEC{r} = \oint_C \VEC{F} \, \UVEC{\tau} \, d r
+= \oint_C (
+\frac{\partial \psi}{\partial x} \frac{d x}{d r}
++ \frac{\partial \psi}{\partial y} \frac{d y}{d r}
++ \frac{\partial \psi}{\partial z} \frac{d z}{d r}
+) \, d r
+= \oint_C \frac{d \psi}{d r} dr = \oint_C d \psi = 0
+\]
+
+</div>
+
+</blockquote>
+<script>Drawing.Scene.setAllImagesSource('drawing.png')</script>
+
+</body>
+</html>

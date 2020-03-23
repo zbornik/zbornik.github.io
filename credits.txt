@@ -1,0 +1,6 @@
+lua.pdf       | http://www.capgo.com/Resources/SoftwareDev/LuaShortRef51.pdf
+lua2.pdf      | https://gotocon.com/dl/jaoo_aus2008/slides/Roberto_LUA.pdf
+latex.pdf     | https://www.rpi.edu/dept/arc/training/latex/LaTeX_symbols.pdf
+scala.pdf     | https://homepage.cs.uiowa.edu/~tinelli/classes/022/Fall13/Notes/scala-quick-reference.pdf
+scala2.pdf    | https://fileadmin.cs.lth.se/pgk/quickref.pdf
+circuitjs     | http://lushprojects.com/circuitjs/circuitjs.html
